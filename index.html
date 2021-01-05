@@ -1,40 +1,199 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <link rel="icon" href="favicon.jpg" type="image/gif" sizes="16x16">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <title>Testing Pimcore with Mockery</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/night.css" id="theme">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <style type="text/css">
+        i {
+            font-style: italic;
+        }
+
+        .highlight-line {
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .reveal a {
+            color: inherit;
+        }
+
+        .reveal a:hover {
+            color: inherit;
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background="#AA4346">
+            <h1>
+                Mockery<br/>
+                <a style="font-size: .1em; letter-spacing: 0" href="https://github.com/mockery/mockery"
+                   target="_blank">https://github.com/mockery/mockery</a>
+            </h1>
+        </section>
+
+        <section data-background="#AA4346">
+            <h2>
+                What's the problem?
+            </h2>
+            <p class="fragment" style="font-size: .5em">
+                Pimcore was formerly based on from Zend and therefore comes with a bunch of static classes.
+            </p>
+            <p class="fragment" style="font-size: .5em">
+                Testing business logic is nearly impossible on a unittest level.
+            </p>
+            <p class="fragment" style="font-size: .5em">
+                Functional tests take time in preparing, writing and running. <br/>
+                <span style="font-size: .5em">And you know, nobody have time nowadays.</span>
+            </p>
+            <p class="fragment" style="font-size: .5em">
+                Static classes are static and can't be mocked...normally
+            </p>
+        </section>
+
+        <section data-background="#AA4346">
+            <h2 style="font-size: 2.5em">
+                What's a possible solution?
+            </h2>
+            <p class="fragment" style="font-size: .5em">
+                It was written on Slide 1 => <b>Mockery</b>
+            </p>
+        </section>
+
+        <section>
+            <section data-background="#AA4346">
+                <h2 style="font-size: 2.5em">
+                    The Setup
+                </h2>
+            </section>
+            <section>
+                <h3>Install it with composer</h3>
+                <pre style="width: auto;display: inline-block;"><code data-trim>
+                    composer require --dev mockery/mockery
+                </code></pre>
+            </section>
+            <section>
+                <h3>The class</h3>
+                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim data-line-numbers="|7-19|11-15|14|21-40|23|28-39">
+                declare(strict_types=1);
+
+                namespace AppBundle;
+
+                class ImageExtractor
+                {
+                    public function getFirstImageFromPage(Page $page): ?Image
+                    {
+                        $image = null;
+                        foreach ($page->getEditables() as $editable) {
+                            if ($editable instanceof ImageTag && $editable->getImage() instanceof Image) {
+                                $image = $editable->getImage();
+                            } elseif ($editable instanceof Renderlet && $editable->getId() > 0) {
+                                $image = $this->extractImageFromRenderlet($editable);
+                            }
+                        }
+
+                        return $image;
+                    }
+
+                    private function extractImageFromRenderlet(Renderlet $editable): ?Image
+                    {
+                        $editablePage = Page::getById($editable->getId());
+                        if (!$editablePage) {
+                            return null;
+                        }
+
+                        switch ($editable->getConfig()['controller']) {
+                            case 'Frontend\Project':
+                                $teaser = $this->teaserFactory->createProjectTeaser($editablePage);
+                                break;
+                            case 'Frontend\News':
+                                $teaser = $this->teaserFactory->createNewsTeaser($editablePage);
+                                break;
+                            default:
+                                $teaser = null;
+                        }
+
+                        return $teaser && $teaser->getAsset() ? $teaser->getAsset()->getImage() : null;
+                    }
+                }
+                </code></pre>
+            </section>
+            <section>
+                <h5>Create a new Unittest for a class with static Pimcore objects</h5>
+                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim data-line-numbers="|26|27">
+                declare(strict_types=1);
+
+                namespace AppBundle;
+
+                use Mockery;
+                use Mockery\MockInterface;
+                use Mockery\Adapter\Phpunit\MockeryTestCase;
+                use Pimcore\Model\Asset\Image;
+                use Pimcore\Model\Document\Page;
+                use Pimcore\Model\Document\Editable\Image as ImageTag;
+
+                class ImageExtractorTest extends <u><i>MockeryTestCase</i></u>
+                {
+                    /**
+                     * @test
+                     */
+                    public function getFirstImageFromDocument()
+                    {
+                        // prepare
+                        $imageMock = $this->createMock(Image::class);
+
+                        $editableMock = $this->createMock(ImageTag::class);
+                        $editableMock->method('getImage')->willReturn($imageMock);
+
+                        /** @var Page|MockInterface $pageMock */
+                        $pageMock = Mockery::mock('alias:' . Page::class);
+                        $pageMock->shouldReceive('getEditables')->andReturn([$editableMock]);
+
+                        $classUnderTest = new ImageExtractor();
+
+                        // test
+                        $result = $classUnderTest->getFirstImageFromPage($pageMock);
+
+                        // verify
+                        $this->assertEquals($imageMock, $result);
+                    }
+                }
+                </code></pre>
+            </section>
+        </section>
+
+        <section data-background="#AA4346">
+            <p style="font-size: .5em">
+                &copy; brainwashed by Patrick
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+
+</body>
 </html>

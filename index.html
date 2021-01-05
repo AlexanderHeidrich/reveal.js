@@ -6,6 +6,8 @@
 
     <title>Javascript Classes</title>
 
+    <link rel="icon" href="JS.png" type="image/gif" sizes="16x16">
+
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/night.css" id="theme">
@@ -37,16 +39,19 @@
 <div class="reveal">
     <div class="slides">
         <section data-background="#FAD12C">
-            <h1>
-                Javascript Classes
+            <h1 style="font-size: 2.5em">
+                OOP w/ Javascript
             </h1>
+            <h5 class="fragment" data-fragment-index="2">
+                Part I - Classes
+            </h5>
         </section>
         <section>
             <section data-background="#FAD12C">
                 <h2>The past</h2>
-                <blockquote>
-                    "You have to know the past to understand the present." <br/>
-                    - Carl Sagan
+                <blockquote style="font-size: .5em">
+                    <span>"You have to know the past to understand the present."</span> <br/>
+                    <span style="font-size: .5em">- Carl Sagan</span>
                 </blockquote>
             </section>
             <section>
@@ -59,7 +64,7 @@
                     Javascript Objects
                 </h4>
                 <pre>
-                    <code data-trim>
+                    <code data-trim data-line-numbers>
                         var name = "Cthulhu";
 
                         var GreatOld = {
@@ -132,22 +137,24 @@
                 </pre>
             </section>
         </section>
-
         <section>
             <section data-background="#FAD12C">
                 <h2>
                     The present
                 </h2>
-                <p>
-                    All features which were available with the prototyping-syntax are now available in the new
-                    class-Syntax.<br/>
-                    Doing OOP in Javascript is fun again...
+                <p style="font-size: .8em">
+                    The prototype syntax got wrapped by the new class syntax.<br/>
+                    That means all prototyping-features are available for the classes.<br/><br/>
+                    So OOP in Javascript becomes readable and fun again.
+                </p>
+                <p class="fragment" data-fragment-index="2" style="font-size: .8em">
+                    But it's still limited compared to other languages.
                 </p>
             </section>
             <section>
-                <p>....but limited compared to other languages.</p>
-            </section>
-            <section>
+                <h3>
+                    Defining classes
+                </h3>
                 <pre>
                     <code data-trim data-noescape data-line-numbers="1-9|11-29|13-14|20-21|31-36">
                         class OuterGod {
@@ -193,8 +200,7 @@
         <section>
             <section data-background="#FAD12C">
                 <h3>
-                    Facts facts facts<br/>
-                    <span class="fragment" data-fragment-index="2">and syntax</span>
+                    More syntax and features
                 </h3>
             </section>
             <section>
@@ -205,7 +211,7 @@
                     Comparable to PHPs <i>parent()</i>
                 </p>
                 <pre style="font-size: .35em">
-                    <code data-trim>
+                    <code data-trim data-line-numbers>
                         class OuterGod {
                             constructor(name) {
                                 this._name = name;
@@ -244,7 +250,7 @@
                     While functions are hoisted, classes aren't!
                 </p>
                 <pre>
-                    <code data-trim>
+                    <code data-trim data-line-numbers>
                         let designer = new Designer(); // Instance of Designer
 
                         function Designer() {
@@ -274,24 +280,28 @@
                     Comparable to PHPs <i>__get()</i> or <i>__set()</i>
                 </p>
                 <pre style="font-size: .5em">
-                    <code data-trim>
+                    <code data-trim data-line-numbers="6-12|19-21|14-16">
                         class GreatOld {
                             constructor(name) {
                                 this._name = name;
                             }
 
                             set name(name) {
+                                if (name.trim().length === 0) {
+                                    throw new Error("Invalid value provided");
+                                }
+
                                 this._name = name;
                             }
 
                             get name() {
-                                return "Our lord and savor " + this._name;
+                                return this._name;
                             }
                         }
 
-                        let cthulhu = new GreatOld("Cthulhu");
-
-                        console.log(cthulhu.name); // Our lord and savor Cthulhu
+                        let cthulhu = new GreatOld("Cthulhu");  // Output: Cthulhu
+                        cthulhu.name = "Peter"; // Output: Peter
+                        cthulhu.name = ""; // Output: Error: Invalid value provided
                     </code>
                 </pre>
             </section>
@@ -304,7 +314,7 @@
                     These are statically callable by using the classname, like in PHP.
                 </p>
                 <pre style="font-size: .5em">
-                    <code data-trim>
+                    <code data-trim data-line-numbers>
                         class OuterGod {
                           constructor(name) {
                             this._name = name;
@@ -321,7 +331,6 @@
 
                         console.log(OuterGod.destroyWorld()); // "Been there, done that."
                         console.log(GreatOld.destroyWorld()); // "Been there, done that."
-
                     </code>
                 </pre>
             </section>
@@ -331,10 +340,10 @@
                     Computed methods
                 </h3>
                 <p style="font-size: 24px">
-                    Good to know...but please...don't!
+                    Usage might be comparable to unbelievable, cosmic horror.
                 </p>
                 <pre style="font-size: .45em">
-                    <code data-trim>
+                    <code data-trim data-line-numbers>
                         // default
                         class GreatOld extends OuterGod {
                             destroyWorld() { }
@@ -357,7 +366,277 @@
                 </pre>
             </section>
         </section>
+        <section>
+            <section data-background="#FAD12C" data-autoslide="2000">
+                <h3 class="fragment">
+                    Part II - Module syntax
+                </h3>
+            </section>
+            <section data-auto-animate>
+                <h3>
+                    What and why?
+                </h3>
+                <ul style="font-size: .5em">
+                    <li class="fragment">
+                        Modules are reuseable code-fragments.
+                    </li>
+                    <li class="fragment">
+                        They can be organized in a well-arranged folder structure.
+                    </li>
+                    <li class="fragment">
+                        Similar to languages like C or JAVA, modules can only be imported when needed to lower the
+                        overhead.
+                    </li>
+                    <li class="fragment">
+                        When bundling: The size of the final bundle/application will change automatically.
+                    </li>
+                    <li class="fragment">
+                        Only specific logic can be exposed, similar to public and private methods.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>
+                    How?
+                </h3>
+                <h4 class="fragment">
+                    Import / Export
+                </h4>
+            </section>
+            <section>
+                <h3>
+                    export
+                </h3>
+                <p style="font-size: .5em">
+                    You can export functions, const, let, var and classes but if have to happen on the top level.<br/>
+                    Unexposed methods will not be available for import.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-line-numbers="1-12|16-26|28">
+                        // GreatOld.js
+                        export const GreatOldEnum = {
+                            CTHULHU: "Cthulhu"
+                        };
 
+                        export class GreatOld {
+                            // ...
+                        }
+
+                        export function destroyWorld() {
+                            // ...
+                        }
+
+                        // or
+
+                        const GreatOldEnum = {
+                            CTHULHU: "Cthulhu"
+                        };
+
+                        class GreatOld {
+                            // ...
+                        }
+
+                        function destroyWorld() {
+                            // ...
+                        }
+
+                        export { GreatOldEnum, GreatOld, destroyWorld }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    import
+                </h3>
+                <p>
+                    All variables/classes/functions which are exported are non-anonymous and can be imported by directly
+                    naming them in the import-statement.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-line-numbers>
+                        // GreatOld.js
+                        export const GreatOldEnum = {
+                            CTHULHU: "Cthulhu"
+                        };
+
+                        export class GreatOld {
+                            // ...
+                        }
+                    </code>
+                </pre>
+                <pre style="font-size: .5em">
+                    <code data-trim data-line-numbers>
+                        // app.js
+                        import { GreatOld, GreatOldEnum }  from './GreatOld.js';
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    export default
+                </h3>
+                <p style="font-size: .5em">
+                    Defining an <i>export default</i> in a module allows to expose an anonymous variable/function/class.<br/>
+                    When importing a module, the <i>export default</i> will be referenced with a given name.<br/>
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-noescape data-line-numbers>
+                        // GreatOld.js
+                        export const GreatOldEnum = {
+                            CTHULHU: "Cthulhu"
+                        };
+
+                        export <i><u>default</u></i> class {
+                            // ...
+                        }
+
+                        // app.js
+                        import <i><u>GreatOld</u></i>, {GreatOldEnum} from './GreatOld.js';
+                    </code>
+                </pre>
+                <p style="font-size: .5em">
+                    <b>There is only one <i>default</i> allowed per file.</b>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    import as alias
+                </h3>
+                <p style="font-size: .5em">
+                    Sometimes classes have different pathes but the same name. Therefor you can alias the imports.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-noescape data-line-numbers>
+                        // app.js
+                        import {NameEnum as GreatOldEnum} from './GreatOld.js';
+                        import {NameEnum as OuterGodEnum} from './OuterGods.js';
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    Module => Object
+                </h3>
+                <p style="font-size: .5em">
+                    With a little help of our friends <i>alias</i> and <i>wildcard</i> we can also move all exported
+                    logic to a Javascript object.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-noescape data-line-numbers>
+                        // GreatOld.js
+                        export const types = {
+                            CTHULHU: "Cthulhu"
+                        };
+
+                        export function destroyWorld {
+                            // ...
+                        }
+
+                        // app.js
+                        import * as GreatOld from './GreatOld.js';
+
+                        console.log(GreatOld.types); // { CTHULHU: "Cthulhu" }
+                    </code>
+                </pre>
+                <p style="font-size: .5em">
+                    Better use classes to create such an object. Alternatively <i>export default</i> a class instance of
+                    you want to use singletonpatterns.
+                </p>
+            </section>
+            <section>
+                <h3>
+                    Aggregation
+                </h3>
+                <p style="font-size: .5em">
+                    Sometimes you want to combine multiple modules in one aggregated module.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-noescape data-line-numbers="1-8|4,10-13|3,15-22">
+                        // Folder structure
+                        modules/
+                            canvas.js
+                            shapes.js
+                            shapes/
+                                circle.js
+                                square.js
+                                triangle.js
+
+                        // shapes.js
+                        export { Square } from './shapes/square.js';
+                        export { Triangle } from './shapes/triangle.js';
+                        export { Circle } from './shapes/circle.js';
+
+                        // canvas.js
+                        // before
+                        import { Square } from './modules/square.js';
+                        import { Circle } from './modules/circle.js';
+                        import { Triangle } from './modules/triangle.js';
+
+                        // after
+                        import { Square, Circle, Triangle } from './modules/shapes.js';
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    Dynamic module loading
+                </h3>
+                <p style="font-size: .5em">
+                    One of the newest features in browsers is to import modules dynamically witch is similar to the
+                    wildcard import.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim data-noescape data-line-numbers="10-13">
+                        // GreatOld.js
+                        export class GreatOld {
+                            destroyWorld {
+                                // ...
+                            }
+                        }
+
+                        // app.js
+                        someButton.addEventListener('click', () => {
+                            import('./GreatOld.js').then((Module) => {
+                                let cthulhu = new Module.GreatOld("Cthulhu");
+                                cthulhu.destroyWorld();
+                            })
+                        });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    Additional
+                </h3>
+                <ul>
+                    <li>
+                        <b>*.mjs</b> is a possible file extension for module files.<br/>
+                        <span class="fragment">But caution, this is not fully supported by browsers and manly only for Node.js servers. But Babel can compile these files to JS-files.</span>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section data-background="#FAD12C">
+                <h2>
+                    Summary
+                </h2>
+                <ul style="font-size: 32px">
+                    <li class="fragment">
+                        Use the class-syntax to create reuseable logic
+                    </li>
+                    <li class="fragment">
+                        Organize your classes in modules
+                    </li>
+                    <li class="fragment">
+                        Think about a reasonable exposure of logic
+                    </li>
+                    <li class="fragment">
+                        Use processors like Babel to have the full support of new features as the Javascript-Specs might change fast.
+                    </li>
+                </ul>
+            </section>
+        </section>
         <section data-background="#FAD12C">
             <h2>
                 Sources
@@ -376,6 +655,10 @@
                 <li>
                     <a href="https://www.digitalocean.com/community/tutorials/understanding-hoisting-in-javascript"
                        target="_blank">Hoisting explained</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Modules"
+                       target="_blank">Modules</a>
                 </li>
             </ul>
         </section>

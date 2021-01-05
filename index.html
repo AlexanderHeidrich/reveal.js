@@ -1,40 +1,397 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Javascript Classes</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/night.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <style type="text/css">
+        i {
+            font-style: italic;
+        }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        .highlight-line {
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .reveal a {
+            color: inherit;
+        }
+
+        .reveal a:hover {
+            color: inherit;
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background="#FAD12C">
+            <h1>
+                Javascript Classes
+            </h1>
+        </section>
+        <section>
+            <section data-background="#FAD12C">
+                <h2>The past</h2>
+                <blockquote>
+                    "You have to know the past to understand the present." <br/>
+                    - Carl Sagan
+                </blockquote>
+            </section>
+            <section>
+                <p>
+                    There were always very limited approaches to create class-like objects in Javascript.
+                </p>
+            </section>
+            <section>
+                <h4>
+                    Javascript Objects
+                </h4>
+                <pre>
+                    <code data-trim>
+                        var name = "Cthulhu";
+
+                        var GreatOld = {
+                            getName: function() {
+                                return name;
+                            }
+                        };
+
+                        console.log(GreatOld.getName()); // Cthulhu
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h4>
+                    Prototypes
+                </h4>
+                <pre>
+                    <code data-trim data-line-numbers="1-3|1-7|9-11">
+                        function GreatOld(name) {
+                            this._name = name;
+                        };
+
+                        GreatOld.prototype.getName = function() {
+                            return this._name;
+                        };
+
+                        var cthulhu = new GreatOld("Cthulhu");
+
+                        console.log(cthulhu.getName()); // Output: Cthulhu
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h4>
+                    Prototypes and inheritance
+                </h4>
+                <pre>
+                    <code data-trim data-noescape data-line-numbers="1-7|9-23|25-30">
+                        function OuterGod(name) {
+                            this._name = name;
+                        };
+
+                        OuterGod.prototype.getName = function() {
+                            return this._name;
+                        };
+
+                        function GreatOld(name, housing) {
+                            OuterGod.call(this, name);
+                            this.housing = housing;
+                        }
+
+                        GreatOld.prototype = Object.create(OuterGod.prototype);
+                        GreatOld.prototype.constructor = GreatOld;
+                        GreatOld.prototype.getName = function() {
+                            let name = OuterGod.prototype.getName.call(this);
+
+                            return `Our lord and savor ${name}`;
+                        }
+                        GreatOld.prototype.getHousing = function() {
+                            return this.housing;
+                        }
+
+                        var nyarlathotep = new OuterGod("Nyarlathotep");
+                        var cthulhu = new GreatOld("Cthulhu", "R'lyeh");
+
+                        console.log(nyarlathotep.getName()); // Nyarlathotep
+                        console.log(cthulhu.getName()); // Our lord and savor Cthulhu
+                        console.log(cthulhu.getHousing()); // R'lyeh
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section data-background="#FAD12C">
+                <h2>
+                    The present
+                </h2>
+                <p>
+                    All features which were available with the prototyping-syntax are now available in the new
+                    class-Syntax.<br/>
+                    Doing OOP in Javascript is fun again...
+                </p>
+            </section>
+            <section>
+                <p>....but limited compared to other languages.</p>
+            </section>
+            <section>
+                <pre>
+                    <code data-trim data-noescape data-line-numbers="1-9|11-29|13-14|20-21|31-36">
+                        class OuterGod {
+                            constructor(name) {
+                                this._name = name;
+                            }
+
+                            getName() {
+                                return this._name;
+                            }
+                        }
+
+                        class GreatOld extends OuterGod {
+                            constructor(name, housing) {
+                                // OuterGod.call(this, name);
+                                super(name);
+
+                                this.housing = housing;
+                            }
+
+                            getName() {
+                                // let name = OuterGod.prototype.getName.call(this);
+                                let name = super.getName();
+
+                                return `Our lord and savor ${name}`;
+                            }
+
+                            getHousing() {
+                                return this.housing;
+                            }
+                        }
+
+                        let nyarlathotep = new OuterGod("Nyarlathotep");
+                        let cthulhu = new GreatOld("Cthulhu", "R'lyeh");
+
+                        console.log(nyarlathotep.getName()); // Nyarlathotep
+                        console.log(cthulhu.getName()); // Our lord and savor Cthulhu
+                        console.log(cthulhu.getHousing()); // R'lyeh
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section data-background="#FAD12C">
+                <h3>
+                    Facts facts facts<br/>
+                    <span class="fragment" data-fragment-index="2">and syntax</span>
+                </h3>
+            </section>
+            <section>
+                <h3>
+                    super();
+                </h3>
+                <p>
+                    Comparable to PHPs <i>parent()</i>
+                </p>
+                <pre style="font-size: .35em">
+                    <code data-trim>
+                        class OuterGod {
+                            constructor(name) {
+                                this._name = name;
+                            }
+
+                            getName() {
+                                return this._name;
+                            }
+                        }
+
+                        class GreatOld extends OuterGod {
+                            constructor(name, housing) {
+                                super(name);
+                                this._housing = housing;
+                            }
+
+                            getHousing() {
+                                return this._housing;
+                            }
+                        }
+
+                        let cthulhu = new GreatOld("Cthulhu", "R'lyeh");
+
+                        console.log(cthulhu.getName(), " dreams in ", cthulhu.getHousing()); // Cthulhu dreams in R'lyeh
+                    </code>
+                </pre>
+                <p style="font-size: 18px">
+                    Super is therefor like a reference to the extended <b><i>prototype</i></b>.
+                </p>
+            </section>
+            <section>
+                <h3>
+                    Hoisting*
+                </h3>
+                <p>
+                    While functions are hoisted, classes aren't!
+                </p>
+                <pre>
+                    <code data-trim>
+                        let designer = new Designer(); // Instance of Designer
+
+                        function Designer() {
+
+                        }
+
+                        // -----
+
+                        let developer = new GreatOld(); // ReferenceError
+
+                        class GreatOld {
+
+                        }
+                    </code>
+                </pre>
+                <i style="font-size: 14px">
+                    *Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top
+                    of their scope before code execution.
+                </i>
+            </section>
+            <section>
+                <h3>
+                    Getter and Setter methods
+                </h3>
+                <p style="font-size: 24px">
+                    Allows e.g. validations, logging, async requests, ... when setting/getting data.<br/>
+                    Comparable to PHPs <i>__get()</i> or <i>__set()</i>
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim>
+                        class GreatOld {
+                            constructor(name) {
+                                this._name = name;
+                            }
+
+                            set name(name) {
+                                this._name = name;
+                            }
+
+                            get name() {
+                                return "Our lord and savor " + this._name;
+                            }
+                        }
+
+                        let cthulhu = new GreatOld("Cthulhu");
+
+                        console.log(cthulhu.name); // Our lord and savor Cthulhu
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <h3>
+                    Static methods
+                </h3>
+                <p style="font-size: 24px">
+                    These are statically callable by using the classname, like in PHP.
+                </p>
+                <pre style="font-size: .5em">
+                    <code data-trim>
+                        class OuterGod {
+                          constructor(name) {
+                            this._name = name;
+                          }
+
+                          static destroyWorld() {
+                            return "Been there, done that.";
+                          }
+                        }
+
+                        class GreatOld extends OuterGod {
+
+                        }
+
+                        console.log(OuterGod.destroyWorld()); // "Been there, done that."
+                        console.log(GreatOld.destroyWorld()); // "Been there, done that."
+
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <h3>
+                    Computed methods
+                </h3>
+                <p style="font-size: 24px">
+                    Good to know...but please...don't!
+                </p>
+                <pre style="font-size: .45em">
+                    <code data-trim>
+                        // default
+                        class GreatOld extends OuterGod {
+                            destroyWorld() { }
+                        }
+
+                        // partial dynamic
+                        const place = "World";
+
+                        class GreatOld extends OuterGod {
+                            ["destroy" + place]() { }
+                        }
+
+                        // full dynamic
+                        const destroyWorldMethod = "destroyWorld";
+
+                        class GreatOld extends OuterGod {
+                            [destroyWorldMethod]() { }
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section data-background="#FAD12C">
+            <h2>
+                Sources
+            </h2>
+            <ul style="font-size: 32px">
+                <li>
+                    <a href="https://thecodebarbarian.com/an-overview-of-es6-classes" target="_blank">An overview</a>
+                </li>
+                <li>
+                    <a href="https://2ality.com/2015/02/es6-classes-final.html" target="_blank">ES6 Definitions</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/class"
+                       target="_blank">Class expression</a>
+                </li>
+                <li>
+                    <a href="https://www.digitalocean.com/community/tutorials/understanding-hoisting-in-javascript"
+                       target="_blank">Hoisting explained</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+
+</body>
 </html>

@@ -32,6 +32,37 @@
             color: inherit;
             text-decoration: underline;
         }
+
+        .brainwashSign {
+            display: inline-block;
+            height: 1em;
+            margin-right: 15px;
+            position: relative;
+            top: 4px;
+            width: 10px;
+        }
+
+        .brainwashSign:before {
+            color: white;
+            content: 'b';
+            display: block;
+            font-size: 0.55em;
+            left: 4px;
+            position: absolute;
+            top: 1px;
+        }
+
+        .brainwashSign:after {
+            border: 1px solid white;
+            border-radius: 50%;
+            content: '';
+            display: block;
+            height: 14px;
+            position: absolute;
+            top: 0;
+            width: 14px;
+            left: 0;
+        }
     </style>
 
 </head>
@@ -88,7 +119,8 @@
             </section>
             <section>
                 <h3>The class</h3>
-                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim data-line-numbers="|7-19|11-15|14|21-40|23|28-39">
+                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim
+                                                                                      data-line-numbers="|7-19|11-15|14|21-40|23|28-39">
                 declare(strict_types=1);
 
                 namespace AppBundle;
@@ -134,7 +166,8 @@
             </section>
             <section>
                 <h5>Create a new Unittest for a class with static Pimcore objects</h5>
-                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim data-line-numbers="|26|27">
+                <pre style="width: auto;display: inline-block; font-size: .3em"><code data-noescape data-trim
+                                                                                      data-line-numbers="|26|27">
                 declare(strict_types=1);
 
                 namespace AppBundle;
@@ -174,11 +207,62 @@
                 }
                 </code></pre>
             </section>
+            <section>
+                <h5>Aliasing</h5>
+                <p style="font-size: .5em">
+                    The <i><b>alias</b></i> is used to create a (not yet loaded) version with the same class namespace
+                    and name.<br/>
+                    If the pimcore/symfony bootstrap happens before (e.g. in the boostrap.php) this might cause errors!
+                </p>
+                <p style="font-size: .5em">
+                    Besides aliasing there are more options for classes like overloading etc.<br/>
+                    For now, aliasing is enough to test in the Pimcore context.
+                </p>
+            </section>
+            <section>
+                <h5>Declare expectations</h5>
+                <p style="font-size: .5em">
+                    Mockery mocks have different methods than a classical MockInterface from PHPUnit.
+                </p>
+                <pre><code data-noescape data-trim data-line-numbers="|3-4,10|5,11|6,12">
+                    // PHPUnit
+                    $mock
+                        ->expects($this->once())
+                        ->method('print')
+                        ->with($arg1, $arg2)
+                        ->willReturn('Hello world.');
+
+                    // Mockery
+                    $mock
+                        ->shouldReceive('print')
+                        ->withArgs($arg1, $arg2)
+                        ->andReturn('Hello world.');
+                </code></pre>
+                <p style="font-size: .5em" class="fragment">
+                    There are even more possibilities. But in general: all known expectations you know from PHPUnit can
+                    also be realized with Mockery as well.
+                </p>
+            </section>
         </section>
 
         <section data-background="#AA4346">
+            <h2>
+                Sources
+            </h2>
+            <ul>
+                <li>
+                    <a href="https://github.com/mockery/mockery" target="_blank">
+                        Github Repository
+                    </a>
+                </li>
+                <li>
+                    <a href="http://docs.mockery.io/en/latest/reference/creating_test_doubles.html" target="_blank">
+                        Official documentation
+                    </a>
+                </li>
+            </ul>
             <p style="font-size: .5em">
-                &copy; brainwashed by Patrick
+                <span class="brainwashSign"></span> brainwashed by Patrick
             </p>
         </section>
     </div>

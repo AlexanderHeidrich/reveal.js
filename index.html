@@ -168,7 +168,7 @@
             </section>
             <section>
                 <h3>
-                    Code highlighting
+                    Syntax highlighting
                 </h3>
                 <pre>
                     <code class="php" data-trim data-line-numbers>
@@ -195,7 +195,7 @@
             </section>
             <section>
                 <h3>
-                    Stepping through code
+                    Code highlighting
                 </h3>
                 <div style="font-size: .6em; text-align: left; width: 90%; margin: 0 auto;">
                     "data-line-numbers" will just add line-numbers. <br/>
@@ -349,8 +349,20 @@
                 </div>
 
                 <aside class="notes">
-                    Remember to show the speaker popup!
+                    Remember to tell them to disable notes on print view.
                 </aside>
+            </section>
+
+            <section data-auto-animate>
+                <h2>Speakernotes</h2>
+                <div style="font-size: .6em">
+                    You can also disable the notes on print page, or move them to an additional page:
+                    <pre style="display: inline-block; width: auto;"><code class="js" data-trim>
+                        Reveal.initialize({
+                            showNotes: true | false | "separate-page"
+                        });
+                    </code></pre>
+                </div>
             </section>
         </section>
         <section>
@@ -366,13 +378,13 @@
                 </li>
                 <li>
                     <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/chalkboard"
-                                 target="_blank">Chalkboard</a>
+                       target="_blank">Chalkboard</a>
                     - write on your presentation (<a
                         href="https://rajgoel.github.io/reveal.js-demos/chalkboard-demo.html#/" target="_blank">Demo</a>)
                 </li>
                 <li>
                     <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow"
-                                 target="_blank">Audio Slideshow</a>
+                       target="_blank">Audio Slideshow</a>
                     - advanced auto manipulation + text2speech (<a
                         href="https://rajgoel.github.io/reveal.js-demos/audio-slideshow-demo.html#/0/6" target="_blank">Demo</a>)
                 </li>
@@ -383,7 +395,7 @@
                 </li>
                 <li>
                     <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/anything"
-                                 target="_blank">Anything</a>
+                       target="_blank">Anything</a>
                     - embedding of nearly all media types, incl. SVG animations (<a
                         href="https://rajgoel.github.io/reveal.js-demos/anything-demo.html" target="_blank">Demo</a>)
                 </li>

@@ -12,19 +12,41 @@
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+    <style type="text/css">
+        i {
+            font-style: italic;
+        }
+
+        .highlight-line {
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .reveal a {
+            color: inherit;
+        }
+
+        .reveal a:hover {
+            color: inherit;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="reveal deck1">
+<div class="reveal">
     <div class="slides">
-        <section>
-            <h1>
+        <section data-autoslide="0">
+            <h1 class="fragment" data-autoslide="2000">
                 Reveal.js
             </h1>
             <p class="fragment">
-                Make presentations the developer style.
+                Make presentations the developer way.
             </p>
         </section>
         <section>
+            <section>
+                <h1>Installation</h1>
+            </section>
             <section>
                 <h2>
                     Basic installation
@@ -38,22 +60,287 @@
                 </p>
             </section>
             <section>
+                <h2>
+                    Full installation
+                </h2>
+                <pre class="fragment">
+                    <code data-trim data-noescape>
+                    git clone https://github.com/hakimel/reveal.js.git
+
+                    cd reveal.js && npm install
+
+                    npm start
+
+                    // open http://localhost:8000
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <iframe src="./examples/barebones.html" style="width: 50vw; height: 30vw">
 
                 </iframe>
             </section>
         </section>
-
         <section>
-            <h2>
-                Full installation
-            </h2>
-            <pre class="fragment"><code data-trim data-noscape>
-					git clone https://github.com/hakimel/reveal.js.git
-                    cd reveal.js && npm install
-                    npm start
-                    // open http://localhost:8000
-				</code></pre>
+            <section data-auto-animate>
+                <h2>Features</h2>
+            </section>
+            <section data-auto-animate>
+                <h2>Features</h2>
+                <p style="font-size: .8em">
+                    Everything CSS3 + JS offers <span class="fragment">and more</span>
+                </p>
+            </section>
+            <section data-auto-animate>
+                <h2>Nested/vertical slides</h2>
+            </section>
+            <section data-auto-animate>
+                <h2>Nested/vertical slides</h2>
+                <pre style="font-size: .35em">
+                    <code class="html" data-trim data-line-numbers="|3-8|9-12|10-18">
+                        <script type="text/template">
+                            <div class="reveal">
+                                <div class="slides">
+                                    <section>
+                                        <h1>Horizontal slide 1</h1>
+                                    </section>
+                                    <section>
+                                        <h1>Horizontal slide 2</h1>
+                                    </section>
+                                    <section>
+                                        <section>
+                                             <h1>Horizontal slide 3</h1>
+                                        </section>
+                                        <section>
+                                             <h1>Vertical slide 1</h1>
+                                        </section>
+                                        <section>
+                                             <h1>Vertical slide 2</h1>
+                                        </section>
+                                    </section>
+                                </div>
+                            </div>
+                        </script>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Fragments</h2>
+                <div>
+                    <span data-autoslide="1500" class="fragment" data-fragment-index="3">
+                        Even if a custom order!
+                    </span><br/>
+                    <span data-autoslide="1500">
+                        Fragments allow
+                    </span>
+                    <span data-autoslide="1500" class="fragment" data-fragment-index="1">
+                        to show content parts
+                    </span>
+                    <span data-autoslide="1500" class="fragment" data-fragment-index="2">
+                        step by step.
+                    </span>
+                    <pre class="fragment" style="font-size: .5em" data-fragment-index="4">
+                        <code class="html" data-trim data-line-numbers>
+                            <script type="text/template">
+                                <span class="fragment" data-fragment-index="4">
+                                    Even if a custom order!
+                                </span><br/>
+                                <span class="fragment" data-fragment-index="1">
+                                    Fragments allow
+                                </span>
+                                <span class="fragment" data-fragment-index="2">
+                                    to show content parts
+                                </span>
+                                <span class="fragment" data-fragment-index="3">
+                                    step by step.
+                                </span>
+                            </script>
+                        </code>
+                    </pre>
+                    </p>
+            </section>
+            <section>
+                <h3>
+                    Code highlighting
+                </h3>
+                <pre>
+                    <code class="php" data-trim data-line-numbers>
+                        class Service {
+                            public function __constructor(Repository $repository) {
+                                $this->repository = $repository;
+                            }
+                        }
+                    </code>
+                    <code class="html" data-trim data-line-numbers="2">
+                        <script type="text/template">
+                            <pre>
+                                <code class="php" data-line-numbers>
+                                    class Service {
+                                        public function __constructor(Repository $repository) {
+                                            $this->repository = $repository;
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                        </script>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>
+                    Stepping through code
+                </h3>
+                <div style="font-size: .6em; text-align: left; width: 90%; margin: 0 auto;">
+                    "data-line-numbers" will just add line-numbers. <br/>
+                    Adding an attribute-value allows defining fragments:<br/><br/>
+                    |&nbsp;&nbsp;&nbsp;&nbsp;defines a fragment<br/>
+                    ,&nbsp;&nbsp;&nbsp;&nbsp;highlight specific lines<br/>
+                    -&nbsp;&nbsp;&nbsp;&nbsp;highlight line-range<br/>
+                </div>
+                <pre><code class="html" data-trim data-line-numbers="">
+                    <script type="text/template">
+                    <pre>
+                        <code class="php" data-line-numbers="|1,3-5">
+
+                        </code>
+                    </pre>
+                    </script>
+                </code></pre>
+                <pre><code class="php" data-trim data-line-numbers="|1,3-5|2">
+                    class Service {
+                        public function __constructor(Repository $repository) {
+                            $this->repository = $repository;
+                        }
+                    }
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>
+                    Content animations
+                </h3>
+                <p style="font-size: .8em">
+                    Adding <i>data-auto-animate</i> to a section will animate all matching elements between two adjacent
+                    auto-animated slides.
+                </p>
+            </section>
+            <section data-auto-animate style="height: 600px">
+                <h3 style="opacity: 0.3; font-size: 18px;">SLIDE 1</h3>
+                <h2 data-id="title" style="margin-top: 260px;">Animate Anything</h2>
+                <div data-id="1"
+                     style="background: white; position: absolute; top: 150px; left: 16%; width: 60px; height: 60px;"></div>
+                <div data-id="2"
+                     style="background: white; position: absolute; top: 150px; left: 36%; width: 60px; height: 60px;"></div>
+                <div data-id="3"
+                     style="background: white; position: absolute; top: 150px; left: 56%; width: 60px; height: 60px;"></div>
+                <div data-id="4"
+                     style="background: white; position: absolute; top: 150px; left: 76%; width: 60px; height: 60px;"></div>
+            </section>
+            <section data-auto-animate style="height: 600px">
+                <h3 style="opacity: 0.3; font-size: 18px;">SLIDE 2</h3>
+                <h2 data-id="title" style="margin-top: 500px">With Auto Animate</h2>
+                <div data-id="1"
+                     style="background: cyan; position: absolute; bottom: 190px; left: 16%; width: 60px; height: 60px;"></div>
+                <div data-id="2"
+                     style="background: magenta; position: absolute; bottom: 190px; left: 36%; width: 60px; height: 160px;"></div>
+                <div data-id="3"
+                     style="background: yellow; position: absolute; bottom: 190px; left: 56%; width: 60px; height: 260px;"></div>
+                <div data-id="4"
+                     style="background: red; position: absolute; bottom: 190px; left: 76%; width: 60px; height: 360px;"></div>
+            </section>
+
+            <section data-auto-animate>
+                <h3>
+                    This also works implicit
+                </h3>
+            </section>
+            <section data-auto-animate>
+                <h3>
+                    This also works implicit
+                </h3>
+                <h4>
+                    if elements are just added while some elements reoccure, the new elements will be animated.
+                </h4>
+            </section>
+            <section data-auto-animate>
+                <h3>
+                    This also works implicit
+                </h3>
+                <h4>
+                    if elements are just added while some elements reoccure, the new elements will be animated.
+                </h4>
+                <pre><code class="html" data-trim>
+                    <script type="text/template">
+                    <section data-auto-animate>
+                        <h3>This also works implicit</h3>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>This also works implicit</h3>
+                        <h4>if elements are just added while some elements reoccure, the appearing will be animated.</h4>
+                    </section>
+                    </script>
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section data-auto-animate>
+                <h2>But what about common presentation-tool-features?!</h2>
+            </section>
+            <section data-auto-animate>
+                <h2>But what about common presentation-tool-features?!</h2>
+                <p>chill...</p>
+            </section>
+            <section>
+                <h2>PDF-Export</h2>
+                <p>
+                    Just open the presentation with <i>?print-pdf</i> at the end of the <a href="http://localhost:8000?print-pdf" target="_blank">URL</a>.
+                </p>
+                <p>
+                    Make sure to disable fragment-slide-separation, else you have one page per fragment/code separation.
+                    <pre><code>Reveal.configure({ pdfSeparateFragments: false });</code></pre>
+                </p>
+            </section>
+        </section>
+        <section>
+            <h2>Useful plugins</h2>
+            <ul style="font-size: .5em; list-style: none">
+                <li>
+                    &#128279; <a href="https://github.com/reveal/multiplex" target="_blank">Multiplex</a> - controll slides remotely
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/chalkboard" target="_blank">Chalkboard</a>
+                    - write on your presentation (<a href="https://rajgoel.github.io/reveal.js-demos/chalkboard-demo.html#/" target="_blank">Demo</a>)
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow" target="_blank">Audio Slideshow</a>
+                    - advanced auto manipulation + text2speech (<a href="https://rajgoel.github.io/reveal.js-demos/audio-slideshow-demo.html#/0/6" target="_blank">Demo</a>)
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/chart" target="_blank">Charts</a>
+                    - visualize charts (<a href="https://rajgoel.github.io/reveal.js-demos/chart-demo.html#/0/2" target="_blank">Demo</a>)
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/rajgoel/reveal.js-plugins/tree/master/anything" target="_blank">Anything</a>
+                    - embedding of nearly all media types, incl. SVG animations (<a href="https://rajgoel.github.io/reveal.js-demos/anything-demo.html" target="_blank">Demo</a>)
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/jlegewie/reveal.js-d3js-plugin" target="_blank">D3.js</a>
+                    - embed 3d Animations with D3.js (<a href="https://jlegewie.com/reveal.js-d3js-plugin/demo/index.html#/" target="_blank">Demo</a>)
+                </li>
+                <li>... and many more</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Sources</h1>
+            <ul style="font-size: .5em; list-style: none">
+                <li>
+                    &#128279; <a href="https://revealjs.com/" target="_blank">Full documentation</a>
+                </li>
+                <li>
+                    &#128279; <a href="https://github.com/hakimel/reveal.js" target="_blank">Github repository</a>
+                </li>
+            </ul>
         </section>
     </div>
 </div>
@@ -68,8 +355,7 @@
     // - https://revealjs.com/config/
     Reveal.initialize({
         hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
+        pdfSeparateFragments: false,
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
     });
 </script>

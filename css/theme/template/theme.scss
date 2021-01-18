@@ -6,6 +6,51 @@
 
 @import "./exposer";
 
+
+// Custom template ------------------------------
+@mixin flex-container($flex-direction: row, $flex-wrap: nowrap, $justify-content: flex-start, $align-items: stretch, $align-content: stretch) {
+	align-content: $align-content;
+	align-items: $align-items;
+	display: flex;
+	flex-flow: $flex-direction $flex-wrap;
+	justify-content: $justify-content;
+}
+
+@mixin flex-item($order: 0, $flex-grow: 0, $flex-shrink: 1, $flex-basis: auto) {
+	flex: $flex-grow $flex-shrink $flex-basis;
+	order: $order;
+}
+
+body {
+	transition: all .5s linear;
+}
+
+iframe {
+	height: 50vh;
+	width: 60vw;
+}
+
+$colorstrip-colors: #ff0267, #db0057, #b50077, #955996, #a0e9f7, #34d1fe;
+.colorstrip {
+	@include flex-container();
+	height: 8px;
+	margin: 0 auto;
+	width: 50vw;
+
+	span {
+		@include flex-item(0, 1, 1, 100%);
+		height: 100%;
+
+		@for $i from 1 through length($colorstrip-colors) {
+			$color: nth($colorstrip-colors, $i);
+			&:nth-child(#{$i}) {
+				background: $color;
+			}
+		}
+	}
+}
+// ---------------------------------------------
+
 .reveal-viewport {
 	@include bodyBackground();
 	background-color: $backgroundColor;

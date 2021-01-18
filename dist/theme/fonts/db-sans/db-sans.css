@@ -1,0 +1,37 @@
+
+@font-face {
+    font-display: swap;
+    font-family: DBScreenHead;
+    font-weight: 400;
+    src: url("./DBScreenHead-Regular.ttf") format("truetype"),
+    url("./DBScreenHead-Regular.woff") format("woff"),
+    url("./DBScreenHead-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: DBScreenHead;
+    font-style: normal;
+    font-weight: 600;
+    src: url("./DBScreenHead-Black.ttf") format("truetype"),
+    url("./DBScreenHead-Black.woff") format("woff"),
+    url("./DBScreenHead-Black.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "DBScreenSans";
+    font-weight: 400;
+    src: url("./DBScreenSans-Regular.ttf") format("truetype"),
+    url("./DBScreenSans-Regular.woff") format("woff"),
+    url("./DBScreenSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "DBScreenSans";
+    font-weight: 600;
+    src: url("./DBScreenSans-Bold.ttf") format("truetype"),
+    url("./DBScreenSans-Bold.woff") format("woff"),
+    url("./DBScreenSans-Bold.woff2") format("woff2");
+}

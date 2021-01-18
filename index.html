@@ -1,40 +1,136 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/dsd-old.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+<body class="theme--black">
+<div class="reveal">
+    <div class="slides">
+        <section data-background-color="#11153a">
+            <h1>Die Digitale Schiene</h1>
+        </section>
+        <section>
+            <section data-auto-animate>
+                <h2>Was ist das?</h2>
+                <blockquote style="text-align: left">
+                    Die DB will mithilfe digitaler Technologien die Kapazität des Schienennetzes erhöhen und so Tausende
+                    zusätzliche Züge am Tag ermöglichen.
+                </blockquote>
+                <div style="font-size: .5em">
+                    Quelle <a href="https://www.deutschebahn.com/de/Digitalisierung/digitaleschiene-3218492"
+                              target="_blank">Deutsche Bahn</a>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h2>Was ist das?</h2>
+                <ul style="font-size: .8em">
+                    <li>
+                        Programm zur Digitalisierung des Schienennetzes
+                    </li>
+                    <li class="fragment">
+                        Einbindung des European Train Control System (ETCS) als Teil des zukünftigen, einheitlichen,
+                        europäischen Eisenbahnverkehrsleitsystems
+                    </li>
+                    <li class="fragment">
+                        Steuerung von Zügen über Funk, statt wartungsintensiver Streckensignale
+                    </li>
+                    <li class="fragment">
+                        Ziel: Schienennetz-Kapazitäten um bis zu 35% erhöhen <span class="fragment">=> tausende Züge mehr pro Tag</span>
+                    </li>
+                    <li class="fragment">
+                        Bereits im Einsatz auf der Strecke "Berlin <-> München"
+                    </li>
+                    <li class="fragment">
+                        Zukunftsvision: vollautomatisiertes Fahren
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <h2>Der Projektfokus</h2>
+            </section>
+            <section data-auto-animate>
+                <h2>Der Projektfokus</h2>
+                <ul>
+                    <li>
+                        Relaunch der von uns gehosteten Seite von 2018
+                        <div class="fragment" style="font-size: .4em">... damals von einer externen Agentur mit Codekit
+                            erstellt * würgender Smile *
+                        </div>
+                    </li>
+                    <li class="fragment">
+                        Fokus auf Content Management Funktionen
+                    </li>
+                </ul>
+                <div class="fragment" style="text-align: left; margin-top: 50px;">
+                    ... und
+                    <blockquote class="fragment" style="font-size: .8em">
+                        &laquo;Wir nehmen DBGrün und passen die Designs sowie einige Module an&raquo;
+                    </blockquote>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>Heute</h2>
+            <iframe src="https://www.digitale-schiene-deutschland.de/"></iframe>
+        </section>
+        <section>
+            <section data-auto-animate>
+                <h2>
+                    Die neue Digitale Schiene
+                </h2>
+            </section>
+            <section data-auto-animate data-state="white" data-background="white">
+                <h2>
+                    Die neue Digitale Schiene
+                    <span class="colorstrip">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </h2>
+            </section>
+        </section>
+    </div>
+</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+
+    Reveal.addEventListener('white', function () {
+        var head = document.getElementsByTagName('head')[0], // reference to document.head for appending/ removing link nodes
+            link = document.createElement('link');           // create the link node
+        link.setAttribute('href', 'dist/theme/dsd-new.css');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('id', 'theme');
+
+        head.appendChild(link);
+    }, false);
+</script>
+</body>
 </html>

@@ -36,6 +36,39 @@ section.has-light-background, section.has-light-background h1, section.has-light
   --selection-background-color: #e7ad52;
   --selection-color: #fff; }
 
+body {
+  transition: all .5s linear; }
+
+iframe {
+  height: 50vh;
+  width: 60vw; }
+
+.colorstrip {
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  height: 8px;
+  margin: 0 auto;
+  width: 50vw; }
+  .colorstrip span {
+    flex: 1 1 100%;
+    order: 0;
+    height: 100%; }
+    .colorstrip span:nth-child(1) {
+      background: #ff0267; }
+    .colorstrip span:nth-child(2) {
+      background: #db0057; }
+    .colorstrip span:nth-child(3) {
+      background: #b50077; }
+    .colorstrip span:nth-child(4) {
+      background: #955996; }
+    .colorstrip span:nth-child(5) {
+      background: #a0e9f7; }
+    .colorstrip span:nth-child(6) {
+      background: #34d1fe; }
+
 .reveal-viewport {
   background: #111;
   background-color: #111; }

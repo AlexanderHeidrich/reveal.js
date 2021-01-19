@@ -17,14 +17,19 @@
 <div class="reveal">
     <div class="slides">
         <section data-background-color="#11153a">
-            <h1>Die Digitale Schiene</h1>
+            <h1 style="font-size: 1.5em">
+                Die Digitale Schiene<br/>
+
+                <img style="margin-top: -20px;" src="img/dsd-loader.svg">
+            </h1>
         </section>
         <section>
             <section data-auto-animate>
                 <h2>Was ist das?</h2>
                 <blockquote style="text-align: left">
-                    Die DB will mithilfe digitaler Technologien die Kapazität des Schienennetzes erhöhen und so Tausende
-                    zusätzliche Züge am Tag ermöglichen.
+                    &laquo;Die DB will mithilfe digitaler Technologien die Kapazität des Schienennetzes erhöhen und so
+                    Tausende
+                    zusätzliche Züge am Tag ermöglichen.&raquo;
                 </blockquote>
                 <div style="font-size: .5em">
                     Quelle <a href="https://www.deutschebahn.com/de/Digitalisierung/digitaleschiene-3218492"
@@ -45,7 +50,8 @@
                         Steuerung von Zügen über Funk, statt wartungsintensiver Streckensignale
                     </li>
                     <li class="fragment">
-                        Ziel: Schienennetz-Kapazitäten um bis zu 35% erhöhen <span class="fragment">=> tausende Züge mehr pro Tag</span>
+                        Ziel: Schienennetz-Kapazitäten um bis zu 35% erhöhen <br/>
+                        <b class="fragment">=> tausende Züge mehr pro Tag</b>
                     </li>
                     <li class="fragment">
                         Bereits im Einsatz auf der Strecke "Berlin <-> München"
@@ -55,16 +61,58 @@
                     </li>
                 </ul>
             </section>
+        </section>
+        <section>
+            <h2>Das Team</h2>
+            <div class="team-grid" data-s>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/marc.jpeg"/>
+                    </figure>
+                </div>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/tilman.jpeg"/>
+                    </figure>
+                </div>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/sarah.jpeg"/>
+                    </figure>
+                </div>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/carlos.jpg"/>
+                    </figure>
+                </div>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/alex.png"/>
+                    </figure>
+                </div>
+                <div class="fragment" data-autoslide="1000">
+                    <figure>
+                        <img src="img/thomas.jpeg"/>
+                    </figure>
+                </div>
+                <div class="fragment">
+                    <figure>
+                        <img src="img/alessa.jpg"/>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        <section>
             <section data-auto-animate>
                 <h2>Der Projektfokus</h2>
             </section>
             <section data-auto-animate>
                 <h2>Der Projektfokus</h2>
                 <ul>
-                    <li>
-                        Relaunch der von uns gehosteten Seite von 2018
-                        <div class="fragment" style="font-size: .4em">... damals von einer externen Agentur mit Codekit
-                            erstellt * würgender Smile *
+                    <li class="fragment" data-autoslide="2000">
+                        Relaunch des Onepagers von 2018
+                        <div class="fragment" style="font-size: .4em">
+                            ... damals von einer externen Agentur mit Codekit erstellt
                         </div>
                     </li>
                     <li class="fragment">
@@ -73,25 +121,76 @@
                 </ul>
                 <div class="fragment" style="text-align: left; margin-top: 50px;">
                     ... und
-                    <blockquote class="fragment" style="font-size: .8em">
+                    <blockquote class="fragment" style="font-size: .8em;position: relative">
                         &laquo;Wir nehmen DBGrün und passen die Designs sowie einige Module an&raquo;
+                        <div class="fragment nope" style="top: 0;right: 0;transform: rotate(20deg) scale(1.5);"></div>
                     </blockquote>
                 </div>
             </section>
         </section>
         <section>
-            <h2>Heute</h2>
-            <iframe src="https://www.digitale-schiene-deutschland.de/"></iframe>
+            <section data-auto-animate>
+                <h3>
+                    &laquo;Was ist denn so schlimm an DBGrün?&raquo;
+                </h3>
+            </section>
+            <section data-auto-animate>
+                <h3>
+                    &laquo;Was ist denn so schlimm an DBGrün?&raquo;
+                </h3>
+                <ul>
+                    <li>
+                        teilweise durch Extern umgesetzt
+                        <ul class="fragment">
+                            <li>
+                                Styles in SASS
+                            </li>
+                            <li class="fragment">
+                                kein Webpack Encore
+                            </li>
+                            <li class="fragment">
+                                andere Codestyles
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">keine Tests</li>
+                    <li class="fragment">semigeiles Backend</li>
+                    <li class="fragment">Bunte Bande war mehr oder weniger auf DBGrün begrenzt</li>
+                    <li class="fragment">gefühlt also ein Schritt zurück</li>
+                </ul>
+                <p class="fragment">aber</p>
+            </section>
+            <section data-auto-animate>
+                <h3>
+                    &laquo;Was ist denn so schlimm an DBGrün?&raquo;
+                </h3>
+                <ul>
+                    <li>Atomic Design</li>
+                    <li class="fragment">kein jQuery</li>
+                    <li class="fragment">bereits Migrationen um Backendänderungen durchzuführen</li>
+                    <li class="fragment">autogeneriertes Quellenverzeichnis</li>
+                    <li class="fragment">Dataquality Feature</li>
+                </ul>
+                <p class="fragment" style="font-size: .5em">
+                    Schon ganz geil, aber da geht noch was!
+                </p>
+            </section>
         </section>
         <section>
             <section data-auto-animate>
-                <h2>
-                    Die neue Digitale Schiene
-                </h2>
+                <h2>Die alte <b>Digitale Schiene</b></h2>
+                <div class="website-preview">
+                    <div class="iframe-wrapper desktop">
+                        <iframe src="https://www.digitale-schiene-deutschland.de/"></iframe>
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h2>Die alte <b>Digitale Schiene</b></h2>
             </section>
             <section data-auto-animate data-state="white" data-background="white">
                 <h2>
-                    Die neue Digitale Schiene
+                    Die neue <b>Digitale Schiene</b>
                     <span class="colorstrip">
                         <span></span>
                         <span></span>
@@ -102,6 +201,140 @@
                     </span>
                 </h2>
             </section>
+            <section data-auto-animate>
+                <h2>
+                    Die neue <b>Digitale Schiene</b>
+                    <span class="colorstrip">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </h2>
+                <div class="website-preview">
+                    <div class="iframe-wrapper desktop">
+                        <iframe src="https://dsd-prod.apprunner.info/"></iframe>
+                    </div>
+                    <div class="iframe-wrapper mobile">
+                        <iframe src="https://dsd-prod.apprunner.info/"></iframe>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Der Plan</h2>
+                <p class="fragment">
+                    Wir bauen die Digitale Schiene basierend auf Learnings und Featuren des DBConnect
+                    Projekts. <span class="fragment">Aber komplett neu.</span>
+                </p>
+                <ul class="fragment">
+                    <li>
+                        Editmode === Previewmode
+                    </li>
+                    <li class="fragment">
+                        Content Animations
+                    </li>
+                    <li class="fragment">
+                        Lazy Image Loading
+                    </li>
+                    <li class="fragment">
+                        Continous Deployment
+                    </li>
+                    <li class="fragment">
+                        Testcoverage
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <p>Und alle so: <i>&laquo;Das wird aber sportlich.&raquo;</i></p>
+            </section>
+            <section data-auto-animate>
+                <p>Und alle so: <i>&laquo;Das wird aber sportlich.&raquo;</i></p>
+                <div style="font-size: .5em; width: 80%; margin: 0 auto;">
+                    von daher ein fettes <b>Danke</b> an Marc, Tilman und Carlos, dass ihr bei meiner Sturheit
+                    mitgegangen seid!
+                </div>
+            </section>
+            <section>
+                <h2>
+                    Das Ergebnis <a href="https://dsd-dev.apprunner.info/admin" target="_blank">im Detail.</a>
+                </h2>
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    Frontendfeatures
+                </h2>
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    Frontendfeatures
+                </h2>
+                <ul style="font-size: .8em">
+                    <li>
+                        Lazy Image Loading
+                    </li>
+                    <li class="fragment">
+                        Lazy Video Loading
+                    </li>
+                    <li class="fragment">
+                        Content Animations
+                    </li>
+                    <li class="fragment">
+                        Stapelbare Module
+                    </li>
+                </ul>
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    Backendfeatures
+                </h2>
+            </section>
+            <section data-auto-animate>
+                <h2>
+                    Backendfeatures
+                </h2>
+                <ul style="font-size: .8em">
+                    <li>
+                        WYSIWYG
+                    </li>
+                    <li>
+                        Renderlets zum Teasern von Dokumenten
+                    </li>
+                    <li class="fragment">
+                        Menügenerierung basierend auf Dokumentenstruktur
+                    </li>
+                    <li class="fragment">
+                        Websitekonfiguration via DataObject
+                    </li>
+                    <li class="fragment">
+                        Continous Development und Deployment (Handsfree)
+                        <ul class="fragment" style="font-size: .5em">
+                            <li>
+                                heißt keine Angst vor'm Deployment durch Junior Developer
+                            </li>
+                            <li class="fragment">
+                                keine manuelle Einstellungen nach einem Deployment
+                            </li>
+                            <li class="fragment">
+                                Rollback-Strategie
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        Nutzung des Pimcore-Glossar
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h2>Danke</h2>
+            <div class="footnote">
+                Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a>
+                from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+            </div>
         </section>
     </div>
 </div>

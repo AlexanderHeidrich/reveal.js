@@ -38,9 +38,21 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 body {
   transition: all .5s linear; }
 
+.iframe-wrapper {
+  height: 510px;
+  margin: 0 auto;
+  width: 830px;
+  position: relative; }
+
 iframe {
-  height: 50vh;
-  width: 60vw; }
+  width: 1280px;
+  height: 786px;
+  border: 0;
+  transform: scale(0.6) translate(-50%, -50%);
+  transform-origin: 0 0;
+  position: absolute;
+  top: 50%;
+  left: 50%; }
 
 .colorstrip {
   align-content: stretch;
@@ -67,6 +79,19 @@ iframe {
       background: #a0e9f7; }
     .colorstrip span:nth-child(6) {
       background: #34d1fe; }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); }
+  .team-grid figure {
+    padding-top: 100%;
+    position: relative;
+    width: 100%; }
+    .team-grid figure img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
 
 .reveal-viewport {
   background: #fff;
@@ -145,8 +170,7 @@ iframe {
 
 /* Ensure certain elements are never larger than the slide itself */
 .reveal img,
-.reveal video,
-.reveal iframe {
+.reveal video {
   max-width: 95%;
   max-height: 95%; }
 
